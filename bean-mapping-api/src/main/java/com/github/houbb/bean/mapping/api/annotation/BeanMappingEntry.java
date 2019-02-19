@@ -1,7 +1,11 @@
 package com.github.houbb.bean.mapping.api.annotation;
 
-import com.github.houbb.bean.mapping.api.core.ICondition;
-import com.github.houbb.bean.mapping.api.core.IConvert;
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
 /**
  * <p> BeanMappingEntry 注解 </p>
@@ -15,27 +19,9 @@ import com.github.houbb.bean.mapping.api.core.IConvert;
  * @author houbinbin
  * @since 0.1.0
  */
+@Inherited
+@Documented
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface BeanMappingEntry {
-
-    /**
-     * 字段的名称
-     * 如果不填，则默认使用字段的名称
-     * @return 名称
-     */
-    String name() default "";
-
-    /**
-     * 生效条件
-     * 1. 默认为生效
-     * @return 具体的生效实现
-     */
-    Class<? extends ICondition> condition() default ICondition.class;
-
-    /**
-     * 类型转换
-     * 1. 默认不进行转换
-     * @return 具体的转换实现
-     */
-    Class<? extends IConvert> convert() default IConvert.class;
-
 }

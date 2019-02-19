@@ -3,6 +3,13 @@ package com.github.houbb.bean.mapping.api.annotation;
 import com.github.houbb.bean.mapping.api.core.ICondition;
 import com.github.houbb.bean.mapping.api.core.IConvert;
 
+import java.lang.annotation.Documented;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+
 /**
  * <p> BeanMapping 注解 </p>
  *
@@ -12,6 +19,10 @@ import com.github.houbb.bean.mapping.api.core.IConvert;
  * @author houbinbin
  * @since 0.1.0
  */
+@Inherited
+@Documented
+@Target(ElementType.FIELD)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface BeanMapping {
 
     /**
