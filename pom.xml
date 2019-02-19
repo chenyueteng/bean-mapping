@@ -4,7 +4,13 @@
 
     <groupId>com.github.houbb</groupId>
     <artifactId>bean-mapping</artifactId>
+    <packaging>pom</packaging>
     <version>0.0.1-SNPASHOT</version>
+    <modules>
+        <module>bean-mapping-api</module>
+        <module>bean-mapping-core</module>
+        <module>bean-mapping-test</module>
+    </modules>
 
     <properties>
         <!--============================== All Plugins START ==============================-->
@@ -42,10 +48,14 @@
             <!--============================== INTER ==============================-->
             <dependency>
                 <groupId>com.github.houbb</groupId>
-                <artifactId>log-integration</artifactId>
-                <version>${log-integration.version}</version>
+                <artifactId>bean-mapping-api</artifactId>
+                <version>${project.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>com.github.houbb</groupId>
+                <artifactId>bean-mapping-core</artifactId>
+                <version>${project.version}</version>
+            </dependency>
 
             <!--============================== OTHER ==============================-->
             <dependency>
@@ -69,18 +79,8 @@
 
     <dependencies>
         <!--============================== INTER ==============================-->
-        <dependency>
-            <groupId>com.github.houbb</groupId>
-            <artifactId>log-integration</artifactId>
-        </dependency>
-
 
         <!--============================== OTHER ==============================-->
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.apiguardian</groupId>
             <artifactId>apiguardian-api</artifactId>
@@ -114,7 +114,7 @@
 
     <!--============================== ADD For sonatype START ==============================-->
     <name>bean-mapping</name>
-    <description>bean-mapping(2018-07-30 21:35:42)</description>
+    <description>bean-mapping is a java bean copy tool.</description>
 
     <parent>
         <groupId>org.sonatype.oss</groupId>
