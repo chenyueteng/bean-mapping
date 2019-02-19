@@ -18,6 +18,7 @@ public final class BeanUtil {
 
     /**
      * 复制属性
+     * 将 source 中的赋值给 target 中名称相同，且可以赋值的类型中去。类似于 spring 的 BeanUtils。
      * @param source 原始对象
      * @param target 目标对象
      */
