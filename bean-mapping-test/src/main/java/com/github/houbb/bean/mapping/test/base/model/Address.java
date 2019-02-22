@@ -3,7 +3,7 @@
  * bean-mapping All rights reserved.
  */
 
-package com.github.houbb.bean.mapping.test.model;
+package com.github.houbb.bean.mapping.test.base.model;
 
 /**
  * 地址信息

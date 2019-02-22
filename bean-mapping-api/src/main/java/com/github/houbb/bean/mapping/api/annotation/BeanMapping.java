@@ -28,6 +28,7 @@ public @interface BeanMapping {
     /**
      * 字段的名称
      * 如果不填，则默认使用字段的名称
+     * 1. 会将 source 的值赋值给 target 和当前 name 属性一致的对象。
      * @return 名称
      */
     String name() default "";

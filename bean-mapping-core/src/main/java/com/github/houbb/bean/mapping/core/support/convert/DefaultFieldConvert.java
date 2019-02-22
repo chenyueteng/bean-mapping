@@ -1,9 +1,11 @@
 package com.github.houbb.bean.mapping.core.support.convert;
 
+import com.github.houbb.bean.mapping.api.annotation.BeanMapping;
 import com.github.houbb.bean.mapping.api.core.IField;
 import com.github.houbb.bean.mapping.core.api.core.field.DefaultField;
 import com.github.houbb.bean.mapping.core.exception.BeanMappingRuntimeException;
 import com.github.houbb.heaven.support.handler.AbstractHandler;
+import com.github.houbb.heaven.util.lang.StringUtil;
 
 import java.lang.reflect.Field;
 
@@ -43,6 +45,14 @@ public class DefaultFieldConvert extends AbstractHandler<Field, IField> {
             defaultField.setMappingValue(fieldValue);
             defaultField.setMappingType(fieldType);
 
+            // 注解信息-name() 的处理
+            if (field.isAnnotationPresent(BeanMapping.class)) {
+                BeanMapping beanMapping = field.getAnnotation(BeanMapping.class);
+                String mappingName = beanMapping.name();
+                if (StringUtil.isNotEmpty(mappingName)) {
+                    defaultField.setMappingName(mappingName);
+                }
+            }
             return defaultField;
         } catch (IllegalAccessException e) {
             throw new BeanMappingRuntimeException(e);

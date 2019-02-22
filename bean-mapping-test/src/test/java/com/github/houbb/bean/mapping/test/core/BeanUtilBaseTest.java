@@ -1,26 +1,20 @@
-/*
- * Copyright (c)  2019. binbin.hou Inc.
- * bean-mapping All rights reserved.
- */
-
 package com.github.houbb.bean.mapping.test.core;
 
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
-import com.github.houbb.bean.mapping.test.model.Address;
-import com.github.houbb.bean.mapping.test.model.User;
-import com.github.houbb.bean.mapping.test.vo.UserVo;
+import com.github.houbb.bean.mapping.test.base.model.Address;
+import com.github.houbb.bean.mapping.test.base.model.User;
+import com.github.houbb.bean.mapping.test.base.model.UserVo;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Date;
 
 /**
- * bean 工具类测试
+ * 基础测试
  * @author binbin.hou
- * date 2019/2/19
- * @since 0.0.1
+ * date 2019/2/22
  */
-public class BeanUtilTest {
+public class BeanUtilBaseTest {
 
     @Test
     public void baseTest() {
@@ -28,6 +22,7 @@ public class BeanUtilTest {
         UserVo userVo = new UserVo();
         BeanUtil.copyProperties(user, userVo);
         System.out.println("转换结果: " + userVo);
+
     }
 
     /**
