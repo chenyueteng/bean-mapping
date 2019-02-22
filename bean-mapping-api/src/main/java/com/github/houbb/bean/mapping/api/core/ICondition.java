@@ -9,14 +9,13 @@ package com.github.houbb.bean.mapping.api.core;
  * @author houbinbin
  * @since 0.1.0
  */
-public interface ICondition<R, T> {
+public interface ICondition {
 
     /**
      * 将原始信息转换为目标信息
      * @param context 当前执行上下文
-     * @param resource 原始对象
      * @return 转换结果
      */
-    T convert(final IContext context, R resource);
+    boolean condition(final IContext context);
 
 }

@@ -2,6 +2,8 @@ package com.github.houbb.bean.mapping.core.api.core.field;
 
 import com.github.houbb.bean.mapping.api.core.IField;
 
+import java.lang.reflect.Field;
+
 /**
  * 默认的字段信息
  * @author binbin.hou
@@ -21,6 +23,21 @@ public class DefaultField implements IField {
     private Object value;
 
     /**
+     * 字段类型
+     */
+    private Class<?> type;
+
+    /**
+     * 访问修饰符
+     */
+    private int modifiers;
+
+    /**
+     * 原始的字段信息
+     */
+    private Field field;
+
+    /**
      * 字段映射名称
      */
     private String mappingName;
@@ -34,6 +51,11 @@ public class DefaultField implements IField {
      * 字段映射值
      */
     private Object mappingValue;
+
+    /**
+     * 映射后的字段类型
+     */
+    private Class<?> mappingType;
 
     @Override
     public String getName() {
@@ -53,6 +75,30 @@ public class DefaultField implements IField {
         this.value = value;
     }
 
+    public Class<?> getType() {
+        return type;
+    }
+
+    public void setType(Class<?> type) {
+        this.type = type;
+    }
+
+    public int getModifiers() {
+        return modifiers;
+    }
+
+    public void setModifiers(int modifiers) {
+        this.modifiers = modifiers;
+    }
+
+    public Field getField() {
+        return field;
+    }
+
+    public void setField(Field field) {
+        this.field = field;
+    }
+
     @Override
     public String getMappingName() {
         return mappingName;
@@ -63,7 +109,7 @@ public class DefaultField implements IField {
     }
 
     @Override
-    public boolean getMappingCondition() {
+    public boolean isMappingCondition() {
         return mappingCondition;
     }
 
@@ -78,5 +124,13 @@ public class DefaultField implements IField {
 
     public void setMappingValue(Object mappingValue) {
         this.mappingValue = mappingValue;
+    }
+
+    public Class<?> getMappingType() {
+        return mappingType;
+    }
+
+    public void setMappingType(Class<?> mappingType) {
+        this.mappingType = mappingType;
     }
 }
