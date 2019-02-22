@@ -13,16 +13,34 @@ import java.util.List;
  */
 public class DefaultContext implements IContext {
 
+    /**
+     * 所有的 source 字段信息列表
+     */
     private List<IField> allSourceFields;
 
+    /**
+     * 当前 source 字段信息
+     */
     private IField currentSourceField;
 
+    /**
+     * source 对象
+     */
     private Object sourceObject;
 
+    /**
+     * 所有的 target 字段信息列表
+     */
     private List<IField> allTargetFields;
 
+    /**
+     * 当前 target 字段信息
+     */
     private IField currentTargetField;
 
+    /**
+     * target 对象
+     */
     private Object targetObject;
 
     @Override
