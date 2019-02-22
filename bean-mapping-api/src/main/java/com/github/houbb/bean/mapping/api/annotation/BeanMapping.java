@@ -35,6 +35,9 @@ public @interface BeanMapping {
     /**
      * 生效条件
      * 1. 默认为生效
+     * 2. 当放在 source 字段上时，表示是否将值赋给 target 字段
+     * 当放在 target 字段上时，表示是否接受赋值。
+     * 3. source+target只有同时生效时，才会发生赋值。
      * @return 具体的生效实现
      */
     Class<? extends ICondition> condition() default ICondition.class;

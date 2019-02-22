@@ -2,12 +2,12 @@ package com.github.houbb.bean.mapping.api.core;
 
 /**
  * <p> 生效条件接口 </p>
- *
+ * 1. 所有的实现都应该提供默认构造器
  * <pre> Created: 2019/2/19 10:15 PM  </pre>
  * <pre> Project: bean-mapping  </pre>
  *
  * @author houbinbin
- * @since 0.0.2
+ * @since 0.1.0
  */
 public interface ICondition<R, T> {
 
