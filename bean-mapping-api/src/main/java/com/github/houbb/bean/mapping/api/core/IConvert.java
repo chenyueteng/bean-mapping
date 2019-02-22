@@ -6,6 +6,7 @@ package com.github.houbb.bean.mapping.api.core;
  * <pre> Created: 2019/2/19 10:15 PM  </pre>
  * <pre> Project: bean-mapping  </pre>
  *
+ * @param <T> 目标泛型
  * @author houbinbin
  * @since 0.1.0
  */
