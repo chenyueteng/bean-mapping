@@ -46,6 +46,9 @@ public @interface BeanMapping {
     /**
      * 类型转换
      * 1. 默认不进行转换
+     * 2. 为了确保转换的确定性+灵活性。对象中指定这个属性，不会改变对象的属性值和类型。
+     * 如果要改变原来的值，那么类型就会被限制的很多，无法足够的灵活。
+     * 3. 只有当 source 的值转换后可以设置给 target，才会将 source 转换后的值赋值给 target 对应属性，其他情况不会对值产生影响。
      * @return 具体的转换实现
      */
     Class<? extends IConvert> convert() default IConvert.class;
