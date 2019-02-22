@@ -3,7 +3,7 @@
  * bean-mapping All rights reserved.
  */
 
-package com.github.houbb.bean.mapping.test.model;
+package com.github.houbb.bean.mapping.test.base.model;
 
 import java.util.Date;
 import java.util.List;

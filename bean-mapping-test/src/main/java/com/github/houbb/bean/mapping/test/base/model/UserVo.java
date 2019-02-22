@@ -3,9 +3,8 @@
  * bean-mapping All rights reserved.
  */
 
-package com.github.houbb.bean.mapping.test.vo;
+package com.github.houbb.bean.mapping.test.base.model;
 
-import com.github.houbb.bean.mapping.test.model.Address;
 
 import java.io.Serializable;
 import java.util.Date;

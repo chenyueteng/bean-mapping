@@ -59,7 +59,7 @@ public class DefaultBeanMapping implements IBeanMpping {
         try {
             for (IField sourceField : sourceDefaultFieldList) {
                 // 判断可以设置，那么将属性的值直接设置过来
-                IField targetField = targetFieldMap.get(sourceField.getName());
+                IField targetField = targetFieldMap.get(sourceField.getMappingName());
                 if (ObjectUtil.isNull(targetField)) {
                     continue;
                 }
@@ -99,10 +99,6 @@ public class DefaultBeanMapping implements IBeanMpping {
             // 注解信息的处理
             if (field.isAnnotationPresent(BeanMapping.class)) {
                 BeanMapping beanMapping = field.getAnnotation(BeanMapping.class);
-                String mappingName = beanMapping.name();
-                if (StringUtil.isNotEmpty(mappingName)) {
-                    defaultField.setMappingName(mappingName);
-                }
 
                 // 条件
                 Class<? extends ICondition> conditionClass = beanMapping.condition();
@@ -145,7 +141,7 @@ public class DefaultBeanMapping implements IBeanMpping {
 
         Map<String, IField> fieldMap = new HashMap<>(fieldList.size());
         for (IField field : fieldList) {
-            fieldMap.put(field.getName(), field);
+            fieldMap.put(field.getMappingName(), field);
         }
         return fieldMap;
     }
