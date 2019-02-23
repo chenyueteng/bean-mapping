@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * 字符串列表转换
+ * 1. 属于将 String 类型转换为 List 类型
  * @author binbin.hou
  * date 2019/2/22
  * @since 0.1.0
