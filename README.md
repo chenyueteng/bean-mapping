@@ -24,7 +24,7 @@
 
 # 变更日志
 
-> [变更日志](doc/CHANGELOG.md)
+> [变更日志](https://github.com/houbb/bean-mapping/blob/master/doc/CHANGELOG.md)
 
 # 快速开始
 
