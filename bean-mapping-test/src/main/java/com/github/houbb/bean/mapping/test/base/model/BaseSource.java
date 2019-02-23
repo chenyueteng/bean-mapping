@@ -9,21 +9,31 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 用户信息
+ * 基础信息 source
  * @author binbin.hou
  * date 2019/2/19
  * @since 0.0.1
  */
-public class User {
+public class BaseSource {
 
+    /**
+     * 名称
+     */
     private String name;
 
+    /**
+     * 年龄
+     */
     private int age;
 
+    /**
+     * 生日
+     */
     private Date birthday;
 
-    private Address address;
-
+    /**
+     * 字符串列表
+     */
     private List<String> stringList;
 
     public String getName() {
@@ -48,14 +58,6 @@ public class User {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
     }
 
     public List<String> getStringList() {

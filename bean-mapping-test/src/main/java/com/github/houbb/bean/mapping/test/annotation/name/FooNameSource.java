@@ -7,7 +7,7 @@ import com.github.houbb.bean.mapping.api.annotation.BeanMapping;
  * date 2019/2/22
  * @since 0.1.0
  */
-public class FooName {
+public class FooNameSource {
 
     @BeanMapping(name = "modelVo")
     private String model;

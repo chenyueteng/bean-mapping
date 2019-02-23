@@ -37,4 +37,12 @@ public class FooConvertTarget {
     public void setSameType(String sameType) {
         this.sameType = sameType;
     }
+
+    public List<String> getListStringType() {
+        return listStringType;
+    }
+
+    public void setListStringType(List<String> listStringType) {
+        this.listStringType = listStringType;
+    }
 }

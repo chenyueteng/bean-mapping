@@ -1,8 +1,6 @@
 package com.github.houbb.bean.mapping.test.annotation.condition.model;
 
 import com.github.houbb.bean.mapping.api.annotation.BeanMapping;
-import com.github.houbb.bean.mapping.test.annotation.condition.IdExistsCondition;
-import com.github.houbb.bean.mapping.test.annotation.condition.NotNullCondition;
 import com.github.houbb.bean.mapping.test.annotation.condition.NullCondition;
 
 /**
@@ -10,7 +8,7 @@ import com.github.houbb.bean.mapping.test.annotation.condition.NullCondition;
  * date 2019/2/22
  * @since 0.1.0
  */
-public class FooConditionVo {
+public class FooConditionTarget {
 
     /**
      * 主键标识
@@ -67,7 +65,7 @@ public class FooConditionVo {
 
     @Override
     public String toString() {
-        return "FooConditionVo{" +
+        return "FooConditionTarget{" +
                 "id=" + id +
                 ", idRemark='" + idRemark + '\'' +
                 ", notNullName='" + notNullName + '\'' +

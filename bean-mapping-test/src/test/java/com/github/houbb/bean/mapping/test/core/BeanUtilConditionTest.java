@@ -1,8 +1,8 @@
 package com.github.houbb.bean.mapping.test.core;
 
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
-import com.github.houbb.bean.mapping.test.annotation.condition.model.FooCondition;
-import com.github.houbb.bean.mapping.test.annotation.condition.model.FooConditionVo;
+import com.github.houbb.bean.mapping.test.annotation.condition.model.FooConditionSource;
+import com.github.houbb.bean.mapping.test.annotation.condition.model.FooConditionTarget;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -19,20 +19,20 @@ public class BeanUtilConditionTest {
      */
     @Test
     public void notNullConditionTest() {
-        FooCondition fooCondition = new FooCondition();
+        FooConditionSource fooConditionSource = new FooConditionSource();
         final String targetValue = "targetNotNullName";
-        FooConditionVo fooConditionVo = new FooConditionVo();
-        fooConditionVo.setNotNullName(targetValue);
+        FooConditionTarget fooConditionTarget = new FooConditionTarget();
+        fooConditionTarget.setNotNullName(targetValue);
 
         //1. 当 source 中没有值时
-        BeanUtil.copyProperties(fooCondition, fooConditionVo);
-        Assertions.assertEquals(targetValue, fooConditionVo.getNotNullName());
+        BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
+        Assertions.assertEquals(targetValue, fooConditionTarget.getNotNullName());
 
         //2. 当 source 中设置值时
         final String sourceValue = "sourceNotNullName";
-        fooCondition.setNotNullName(sourceValue);
-        BeanUtil.copyProperties(fooCondition, fooConditionVo);
-        Assertions.assertEquals(sourceValue, fooConditionVo.getNotNullName());
+        fooConditionSource.setNotNullName(sourceValue);
+        BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
+        Assertions.assertEquals(sourceValue, fooConditionTarget.getNotNullName());
     }
 
     /**
@@ -43,20 +43,20 @@ public class BeanUtilConditionTest {
         final String sourceNullView = "sourceNullView";
         final String targetNullView = "targetNullView";
 
-        FooCondition fooCondition = new FooCondition();
-        fooCondition.setNullView(sourceNullView);
+        FooConditionSource fooConditionSource = new FooConditionSource();
+        fooConditionSource.setNullView(sourceNullView);
 
-        FooConditionVo fooConditionVo = new FooConditionVo();
-        fooConditionVo.setNullView(targetNullView);
+        FooConditionTarget fooConditionTarget = new FooConditionTarget();
+        fooConditionTarget.setNullView(targetNullView);
 
         //1. 当 target 字段有值时
-        BeanUtil.copyProperties(fooCondition, fooConditionVo);
-        Assertions.assertEquals(targetNullView, fooConditionVo.getNullView());
+        BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
+        Assertions.assertEquals(targetNullView, fooConditionTarget.getNullView());
 
         //2. 当 target 字段信息为 null 时
-        fooConditionVo.setNullView(null);
-        BeanUtil.copyProperties(fooCondition, fooConditionVo);
-        Assertions.assertEquals(sourceNullView, fooConditionVo.getNullView());
+        fooConditionTarget.setNullView(null);
+        BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
+        Assertions.assertEquals(sourceNullView, fooConditionTarget.getNullView());
     }
 
     /**
@@ -66,19 +66,19 @@ public class BeanUtilConditionTest {
     public void idExistsConditionTest() {
         final String idRemark = "idRemark";
 
-        FooCondition fooCondition = new FooCondition();
-        fooCondition.setIdRemark(idRemark);
+        FooConditionSource fooConditionSource = new FooConditionSource();
+        fooConditionSource.setIdRemark(idRemark);
 
-        FooConditionVo fooConditionVo = new FooConditionVo();
+        FooConditionTarget fooConditionTarget = new FooConditionTarget();
 
         //1. source 对象中的 id 没有值
-        BeanUtil.copyProperties(fooCondition, fooConditionVo);
-        Assertions.assertNull(fooConditionVo.getIdRemark());
+        BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
+        Assertions.assertNull(fooConditionTarget.getIdRemark());
 
         //2. source 对象中的 id 有值
-        fooCondition.setId(1L);
-        BeanUtil.copyProperties(fooCondition, fooConditionVo);
-        Assertions.assertEquals(idRemark, fooConditionVo.getIdRemark());
+        fooConditionSource.setId(1L);
+        BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
+        Assertions.assertEquals(idRemark, fooConditionTarget.getIdRemark());
     }
 
 }

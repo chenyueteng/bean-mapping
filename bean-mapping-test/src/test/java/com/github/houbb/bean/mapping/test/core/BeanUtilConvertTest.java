@@ -6,6 +6,8 @@ import com.github.houbb.bean.mapping.test.annotation.convert.model.FooConvertTar
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+
 /**
  * 转换器测试
  * @author binbin.hou
@@ -47,6 +49,21 @@ public class BeanUtilConvertTest {
         //验证后缀转换器生效
         BeanUtil.copyProperties(fooConvertSource, fooConvertTarget);
         Assertions.assertEquals("sameType-TEST", fooConvertTarget.getSameType());
+    }
+
+    /**
+     * 将一个字段类型转换为另一种类型的测试
+     */
+    @Test
+    public void listTypeTest() {
+        FooConvertSource fooConvertSource = new FooConvertSource();
+        fooConvertSource.setListStringType("listStringType");
+
+        FooConvertTarget fooConvertTarget = new FooConvertTarget();
+
+        //验证列表转换器生效
+        BeanUtil.copyProperties(fooConvertSource, fooConvertTarget);
+        Assertions.assertEquals(Arrays.asList("listStringType"), fooConvertTarget.getListStringType());
     }
 
 }

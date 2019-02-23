@@ -1,6 +1,7 @@
 package com.github.houbb.bean.mapping.test.annotation.convert.model;
 
 import com.github.houbb.bean.mapping.api.annotation.BeanMapping;
+import com.github.houbb.bean.mapping.test.annotation.convert.ListTypeConvert;
 import com.github.houbb.bean.mapping.test.annotation.convert.StringSuffixConvert;
 
 /**
@@ -19,6 +20,12 @@ public class FooConvertSource {
     @BeanMapping(convert = StringSuffixConvert.class)
     private String sameType;
 
+    /**
+     * 字符串转换为列表
+     */
+    @BeanMapping(convert = ListTypeConvert.class)
+    private String listStringType;
+
     public String getSourceSuffix() {
         return sourceSuffix;
     }
@@ -33,5 +40,13 @@ public class FooConvertSource {
 
     public void setSameType(String sameType) {
         this.sameType = sameType;
+    }
+
+    public String getListStringType() {
+        return listStringType;
+    }
+
+    public void setListStringType(String listStringType) {
+        this.listStringType = listStringType;
     }
 }
