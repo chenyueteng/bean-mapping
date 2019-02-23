@@ -42,7 +42,7 @@ public final class FieldUtil {
 
         final Class<?> sourceType = sourceField.getMappingType();
         final Class<?> targetType = targetField.getMappingType();
-        if(sourceType.isAssignableFrom(targetType)) {
+        if(targetType.isAssignableFrom(sourceType)) {
             return true;
         }
 

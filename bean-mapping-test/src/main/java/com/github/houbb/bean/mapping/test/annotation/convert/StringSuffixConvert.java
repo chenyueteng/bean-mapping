@@ -2,7 +2,6 @@ package com.github.houbb.bean.mapping.test.annotation.convert;
 
 import com.github.houbb.bean.mapping.api.core.IContext;
 import com.github.houbb.bean.mapping.api.core.IConvert;
-import com.github.houbb.bean.mapping.api.core.IField;
 
 /**
  * 字符串加上后缀

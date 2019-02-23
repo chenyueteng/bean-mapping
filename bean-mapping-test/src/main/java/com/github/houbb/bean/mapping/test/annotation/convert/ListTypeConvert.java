@@ -23,7 +23,7 @@ public class ListTypeConvert implements IConvert<List<String>> {
             return null;
         }
 
-        return Collections.singletonList(field.toString());
+        return Arrays.asList(field.toString());
     }
 
 }
