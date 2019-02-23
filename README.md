@@ -40,7 +40,7 @@ Maven 3.X 及其以上版本
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>bean-mapping-core</artifactId>
-    <version>0.0.2</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 
@@ -146,12 +146,14 @@ BeanUtil.copyProperties(baseSource, baseTarget);
 
 比如两个字段名称不同，我们也想进行赋值，值得处理转换等等。
 
-Bean-Mapping 还实现了以下功能:
+Bean-Mapping 相关文档:
 
-[BeanMapping 注解的引入]()
+[项目模块简介和预期功能](doc/blog/属性复制框架-00-项目模块和预期功能.md)
 
-[不同名称字段的指定赋值]()
+[BeanMapping 注解的引入](doc/blog/属性复制框架-01-BeanMapping%20注解引入.md)
 
-[自定义赋值生效的条件]()
+[不同名称字段的指定赋值](doc/blog/属性复制框架-02-BeanMapping%20名称属性.md)
 
-[自定义字段转换实现]()
+[自定义赋值生效的条件](doc/blog/属性复制框架-03-BeanMapping%20赋值条件.md)
+
+[自定义字段转换实现](doc/blog/属性复制框架-04-BeanMapping%20字段转换.md)
