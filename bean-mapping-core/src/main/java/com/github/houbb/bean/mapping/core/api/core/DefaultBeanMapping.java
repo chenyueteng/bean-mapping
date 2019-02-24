@@ -7,20 +7,24 @@ package com.github.houbb.bean.mapping.core.api.core;
 
 import com.github.houbb.bean.mapping.api.annotation.BeanMapping;
 import com.github.houbb.bean.mapping.api.annotation.BeanMappingEntry;
-import com.github.houbb.bean.mapping.api.core.*;
+import com.github.houbb.bean.mapping.api.core.IBeanMpping;
+import com.github.houbb.bean.mapping.api.core.ICondition;
+import com.github.houbb.bean.mapping.api.core.IConvert;
+import com.github.houbb.bean.mapping.api.core.IField;
 import com.github.houbb.bean.mapping.core.api.core.context.DefaultContext;
 import com.github.houbb.bean.mapping.core.api.core.field.DefaultField;
 import com.github.houbb.bean.mapping.core.exception.BeanMappingRuntimeException;
 import com.github.houbb.bean.mapping.core.support.convert.DefaultFieldConvert;
+import com.github.houbb.bean.mapping.core.util.BeanUtil;
 import com.github.houbb.bean.mapping.core.util.ClassTypeUtil;
 import com.github.houbb.bean.mapping.core.util.FieldUtil;
-import com.github.houbb.bean.mapping.core.util.MappingClassUtil;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.util.*;
 
@@ -106,7 +110,7 @@ public class DefaultBeanMapping implements IBeanMpping {
                 this.handleSourceDefaultField(defaultField);
             }
 
-            // BeanMapping 注解信息的处理
+            // @BeanMapping 注解信息的处理
             if (field.isAnnotationPresent(BeanMapping.class)) {
                 BeanMapping beanMapping = field.getAnnotation(BeanMapping.class);
 
@@ -118,7 +122,11 @@ public class DefaultBeanMapping implements IBeanMpping {
                     defaultField.setMappingCondition(result);
                 }
 
-                // 转换-会受到 @BeanMappingEntry 的转换结果影响
+                // 转换
+                if(!defaultField.isMappingCondition()) {
+                    // 条件不生效，直接返回，优化性能。
+                    return;
+                }
                 Class<? extends IConvert> convertClass = beanMapping.convert();
                 if (!IConvert.class.equals(convertClass)) {
                     IConvert convert = convertClass.newInstance();
@@ -138,8 +146,6 @@ public class DefaultBeanMapping implements IBeanMpping {
         }
     }
 
-
-
     /**
      * 是否需要进行明细处理的字段
      * 1. 基本类型
@@ -151,6 +157,15 @@ public class DefaultBeanMapping implements IBeanMpping {
      * 对 mappingValue 进行相关的处理
      * 1. 如果不作处理，直接返回原来的值即可。
      * 2. 如果需要做处理，则将所有的处理值结果放在 {@link DefaultField#setMappingValue(Object)} 属性上。
+     *
+     * 【情况1】
+     * 处理 source 的时候，对应的 target 上下文怎么办？
+     * 此处我们约定，entry的处理最后作用的仍然是最外层，所以在处理 source 的时候，甚至不用关心 entry 的 name+condition。
+     * 只需要关心当 source.condition() 生效时，source.convert() 对于值的影响即可。
+     *
+     * 【情况2】
+     * 如果所有的 entry 依然希望保持 source+target 的 name/conditon 生效。
+     * 就需要同步处理 target 相关的上下文信息，但是最后的使用是不相干的，所以不用处理。
      * @param sourceDefaultField 原始的字段信息
      */
     private void handleSourceDefaultField(final DefaultField sourceDefaultField) {
@@ -159,12 +174,8 @@ public class DefaultBeanMapping implements IBeanMpping {
 
         //Map Entry 的赋值处理
         //1. 如果需要处理，会变得比较复杂。暂时不做处理
-        //2. TODO: 后期可以针对 key/value 进行分别的处理。
+        //2. 后期可以针对 key/value 进行分别的处理。
         if(ClassTypeUtil.isMapClass(fieldType)) {
-            return;
-        }
-        // JDK 本身的对象类，直接不做处理。
-        if(ClassTypeUtil.isJdkClass(fieldType)) {
             return;
         }
 
@@ -176,18 +187,19 @@ public class DefaultBeanMapping implements IBeanMpping {
         }
 
         // 数组
+        // [数组反射基础知识](https://www.cnblogs.com/penghongwei/p/3300094.html)
         if(ClassTypeUtil.isArrayClass(fieldType)) {
             Object[] arrays = (Object[]) mappingValue;
             if(ArrayUtil.isNotEmpty(arrays)) {
-                // 针对数组信息进行处理
-                // 对于数组值得处理，直接递归处理即可。
-                // 这里可以利用递归获取值，然后使用一个子类存放值。
-                List<Object> resultList = new ArrayList<Object>();
-                for(Object entry : arrays) {
-                    // 单独处理每一个明细
-
+                // 获取数组的元素类型。
+                final Class arrayComponentClass = arrays.getClass().getComponentType();
+                final int arrayLength = arrays.length;
+                Object newArray = Array.newInstance(arrayComponentClass, arrayLength);
+                for (int i = 0; i < arrayLength; i++) {
+                    Object entryMapping = getEntryMapping(arrays[i]);
+                    Array.set(newArray, i, entryMapping);
                 }
-                mappingValue = resultList;
+                mappingValue = newArray;
             }
         }
 
@@ -195,10 +207,19 @@ public class DefaultBeanMapping implements IBeanMpping {
         if(ClassTypeUtil.isIterableClass(fieldType)) {
             Iterable<?> iterableMappingValue = (Iterable<?>) mappingValue;
             Iterator iterator = iterableMappingValue.iterator();
+
+            List<Object> resultList = new ArrayList<>();
             while(iterator.hasNext()) {
                 Object entry = iterator.next();
-
+                Object entryMapping = getEntryMapping(entry);
+                resultList.add(entryMapping);
             }
+            mappingValue = resultList;
+        }
+
+        // JDK 本身的对象类，直接不做处理。
+        if(ClassTypeUtil.isJdkClass(fieldType)) {
+            return;
         }
 
         // 自定义 java 对象
@@ -207,8 +228,32 @@ public class DefaultBeanMapping implements IBeanMpping {
             // 不包含任何注解，直接赋值(不做任何处理)，不是基础属性，则做进一步的赋值。
             // 是否需要调用一次属性的复制？将 object 的值，使用 BeanUtil.copy 再赋值一遍，这就变成了深度拷贝。
             // 这里需要递归循环当前对象的所有 Field ，去处理对应的信息。
-
+            // 替换掉原来的结果信息。
+            mappingValue = getEntryMapping(mappingValue);
         }
+
+        // 重新设置值
+        sourceDefaultField.setMappingValue(mappingValue);
+    }
+
+    /**
+     * 获取映射后的明细对象
+     * 我们约定，entry 中的信息无法进行跨类型的转换，否则会导致对象的报错。
+     * 1. name 在这种映射中是无效的
+     * 2. condition 是有效的
+     * 3. convert 不允许跨类型的转换。
+     * 因为最外层还要使用这个属性，直接内部就把类型替换掉，将导致最外层无法使用。
+     * @param entry 原始明细对象
+     * @return 映射后的明细对象
+     */
+    private Object getEntryMapping(final Object entry) {
+        if(ObjectUtil.isNull(entry)) {
+            return entry;
+        }
+
+        Object entryMapping = ClassUtil.newInstance(entry.getClass());
+        BeanUtil.copyProperties(entry, entryMapping);
+        return entryMapping;
     }
 
     /**
