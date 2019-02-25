@@ -167,6 +167,7 @@ public class DefaultBeanMapping implements IBeanMpping {
      * 如果所有的 entry 依然希望保持 source+target 的 name/conditon 生效。
      * 就需要同步处理 target 相关的上下文信息，但是最后的使用是不相干的，所以不用处理。
      * @param sourceDefaultField 原始的字段信息
+     * @since 0.2.0
      */
     private void handleSourceDefaultField(final DefaultField sourceDefaultField) {
         final Field field = sourceDefaultField.getField();
@@ -245,6 +246,7 @@ public class DefaultBeanMapping implements IBeanMpping {
      * 因为最外层还要使用这个属性，直接内部就把类型替换掉，将导致最外层无法使用。
      * @param entry 原始明细对象
      * @return 映射后的明细对象
+     * @since 0.2.0
      */
     private Object getEntryMapping(final Object entry) {
         if(ObjectUtil.isNull(entry)) {
