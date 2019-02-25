@@ -12,9 +12,9 @@ import java.lang.reflect.Modifier;
  * date 2019/2/22
  * @since 0.1.0
  */
-public final class FieldUtil {
+public final class MappingFieldUtil {
 
-    private FieldUtil(){}
+    private MappingFieldUtil(){}
 
     /**
      * 是否可以设置
