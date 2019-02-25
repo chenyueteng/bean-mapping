@@ -17,7 +17,7 @@ import com.github.houbb.bean.mapping.core.exception.BeanMappingRuntimeException;
 import com.github.houbb.bean.mapping.core.support.convert.DefaultFieldConvert;
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
 import com.github.houbb.bean.mapping.core.util.ClassTypeUtil;
-import com.github.houbb.bean.mapping.core.util.FieldUtil;
+import com.github.houbb.bean.mapping.core.util.MappingFieldUtil;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
@@ -83,7 +83,7 @@ public class DefaultBeanMapping implements IBeanMpping {
                 fillField(defaultContext, targetDefaultField);
 
                 // 这里有个问题：如果属性为对象/列表/map 等等，直接设置，那么是浅拷贝。
-                if (FieldUtil.isAssignable(sourceDefaultField, targetDefaultField)) {
+                if (MappingFieldUtil.isAssignable(sourceDefaultField, targetDefaultField)) {
                     Object sourceValue = sourceDefaultField.getMappingValue();
                     targetDefaultField.getField().set(target, sourceValue);
                 }
