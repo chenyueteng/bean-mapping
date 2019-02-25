@@ -12,8 +12,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 用户视图对象
  * @author binbin.hou
  * date 2019/2/19
+ * @since 0.0.1
  */
 public class UserVo implements Serializable {
 

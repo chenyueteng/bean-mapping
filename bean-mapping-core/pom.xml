@@ -10,7 +10,7 @@
     <parent>
         <artifactId>bean-mapping</artifactId>
         <groupId>com.github.houbb</groupId>
-        <version>0.1.0-SNAPSHOT</version>
+        <version>0.1.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -21,6 +21,12 @@
         <dependency>
             <groupId>com.github.houbb</groupId>
             <artifactId>bean-mapping-api</artifactId>
+        </dependency>
+
+        <!--============================== INTER ==============================-->
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>heaven</artifactId>
         </dependency>
     </dependencies>
 

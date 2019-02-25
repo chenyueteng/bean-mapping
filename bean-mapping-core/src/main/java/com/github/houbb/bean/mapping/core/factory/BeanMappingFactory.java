@@ -7,7 +7,7 @@ package com.github.houbb.bean.mapping.core.factory;
 
 import com.github.houbb.bean.mapping.api.core.IBeanMpping;
 import com.github.houbb.bean.mapping.core.api.core.DefaultBeanMapping;
-import com.github.houbb.bean.mapping.core.util.ObjectUtil;
+import com.github.houbb.heaven.util.lang.ObjectUtil;
 
 /**
  * Bean 映射工厂

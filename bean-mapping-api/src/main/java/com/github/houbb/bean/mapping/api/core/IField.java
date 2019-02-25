@@ -24,7 +24,7 @@ public interface IField {
      * 当前字段的是否生效
      * @return 是否生效
      */
-    boolean getMappingCondition();
+    boolean isMappingCondition();
 
     /**
      * 获取映射名称

@@ -6,8 +6,10 @@
 package com.github.houbb.bean.mapping.test.model;
 
 /**
+ * 地址信息
  * @author binbin.hou
  * date 2019/2/19
+ * @since 0.0.1
  */
 public class Address {
 
