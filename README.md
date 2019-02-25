@@ -32,11 +32,7 @@ Maven 3.X 及其以上版本
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>bean-mapping-core</artifactId>
-<<<<<<< 6a6738c38117b173d2f01db66f77020431f3bb51
     <version>0.0.1</version>
-=======
-    <version>0.0.2</version>
->>>>>>> [Feature] 添加注解的基础实现
 </dependency>
 ```
 
