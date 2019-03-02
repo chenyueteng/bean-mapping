@@ -51,6 +51,12 @@ public @interface BeanMappingEntry {
 
 ## 对象
 
+[BeanUtilEntryBeanTest](https://github.com/houbb/bean-mapping/tree/release_0.2.0/bean-mapping-test/src/test/java/com/github/houbb/bean/mapping/test/core/entry/BeanUtilEntryBeanTest.java)
+
 ## 数组
 
+[BeanUtilEntryArrayTest](https://github.com/houbb/bean-mapping/tree/release_0.2.0/bean-mapping-test/src/test/java/com/github/houbb/bean/mapping/test/core/entry/BeanUtilEntryArrayTest.java)
+
 ## 集合
+
+[BeanUtilEntryIterableTest](https://github.com/houbb/bean-mapping/tree/release_0.2.0/bean-mapping-test/src/test/java/com/github/houbb/bean/mapping/test/core/entry/BeanUtilEntryIterableTest.java)
