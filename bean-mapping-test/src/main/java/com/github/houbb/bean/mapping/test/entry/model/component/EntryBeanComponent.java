@@ -1,4 +1,4 @@
-package com.github.houbb.bean.mapping.test.entry.model.bean;
+package com.github.houbb.bean.mapping.test.entry.model.component;
 
 import com.github.houbb.bean.mapping.api.annotation.BeanMapping;
 import com.github.houbb.bean.mapping.test.annotation.convert.StringSuffixConvert;
@@ -11,7 +11,7 @@ import com.github.houbb.bean.mapping.test.annotation.convert.StringSuffixConvert
  *
  * @author houbinbin
  */
-public class EntryBeanSourceComponent {
+public class EntryBeanComponent {
 
     /**
      * 字段名称

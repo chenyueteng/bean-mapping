@@ -1,6 +1,6 @@
 package com.github.houbb.bean.mapping.test.entry.model.bean;
 
-import java.util.List;
+import com.github.houbb.bean.mapping.test.entry.model.component.EntryBeanComponent;
 
 /**
  * <p> 明细-对象-目标对象 </p>
@@ -13,29 +13,15 @@ import java.util.List;
 public class EntryBeanTarget {
 
     /**
-     * 字符串转换为列表
-     */
-    private List<String> stringList;
-
-    /**
      * 单个字段信息处理
      */
-    private EntryBeanSourceComponent component;
+    private EntryBeanComponent component;
 
-
-    public List<String> getStringList() {
-        return stringList;
-    }
-
-    public void setStringList(List<String> stringList) {
-        this.stringList = stringList;
-    }
-
-    public EntryBeanSourceComponent getComponent() {
+    public EntryBeanComponent getComponent() {
         return component;
     }
 
-    public void setComponent(EntryBeanSourceComponent component) {
+    public void setComponent(EntryBeanComponent component) {
         this.component = component;
     }
 }
