@@ -22,7 +22,7 @@
 
 ### 0.2.0 版本新特性
 
-- 支持对象/集合/数组字段的赋值，对象赋值更加方便。
+- 支持属性字段为对象/集合/数组的赋值，对象赋值更加方便。
 
 # 变更日志
 
@@ -42,7 +42,7 @@ Maven 3.X 及其以上版本
 <dependency>
     <groupId>com.github.houbb</groupId>
     <artifactId>bean-mapping-core</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
 </dependency>
 ```
 
@@ -159,3 +159,5 @@ Bean-Mapping 相关文档:
 [自定义赋值生效的条件](doc/blog/属性复制框架-03-BeanMapping%20赋值条件.md)
 
 [自定义字段转换实现](doc/blog/属性复制框架-04-BeanMapping%20字段转换.md)
+
+[@BeanMappingEntry-]()
