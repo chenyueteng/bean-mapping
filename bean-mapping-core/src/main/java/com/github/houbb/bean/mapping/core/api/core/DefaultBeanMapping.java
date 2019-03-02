@@ -16,10 +16,10 @@ import com.github.houbb.bean.mapping.core.api.core.field.DefaultField;
 import com.github.houbb.bean.mapping.core.exception.BeanMappingRuntimeException;
 import com.github.houbb.bean.mapping.core.support.convert.DefaultFieldConvert;
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
-import com.github.houbb.bean.mapping.core.util.ClassTypeUtil;
 import com.github.houbb.bean.mapping.core.util.MappingFieldUtil;
 import com.github.houbb.heaven.util.common.ArgUtil;
 import com.github.houbb.heaven.util.lang.ObjectUtil;
+import com.github.houbb.heaven.util.lang.reflect.ClassTypeUtil;
 import com.github.houbb.heaven.util.lang.reflect.ClassUtil;
 import com.github.houbb.heaven.util.util.ArrayUtil;
 import com.github.houbb.heaven.util.util.CollectionUtil;
@@ -42,10 +42,12 @@ public class DefaultBeanMapping implements IBeanMpping {
         //1. 参数校验
         ArgUtil.notNull(source, "Source not allow null here.");
         ArgUtil.notNull(target, "Target not allow null here.");
+        final Class<?> sourceClass = source.getClass();
+        final Class<?> targetClass = target.getClass();
 
         //2. 获取属性列表
-        List<Field> sourceFieldList = ClassUtil.getAllFieldList(source.getClass());
-        List<Field> targetFieldList = ClassUtil.getAllFieldList(target.getClass());
+        List<Field> sourceFieldList = ClassUtil.getAllFieldList(sourceClass);
+        List<Field> targetFieldList = ClassUtil.getAllFieldList(targetClass);
 
         //2.1 source 列表的过滤
         List<IField> sourceDefaultFieldList = (List<IField>) CollectionUtil.buildCollection(sourceFieldList,
@@ -107,7 +109,7 @@ public class DefaultBeanMapping implements IBeanMpping {
             final Field field = defaultField.getField();
             // @BeanMappingEntry 注解信息处理
             if(field.isAnnotationPresent(BeanMappingEntry.class)) {
-                this.handleSourceDefaultField(defaultField);
+                this.handleMappingValue(defaultField);
             }
 
             // @BeanMapping 注解信息的处理
@@ -166,17 +168,14 @@ public class DefaultBeanMapping implements IBeanMpping {
      * 【情况2】
      * 如果所有的 entry 依然希望保持 source+target 的 name/conditon 生效。
      * 就需要同步处理 target 相关的上下文信息，但是最后的使用是不相干的，所以不用处理。
-     * @param sourceDefaultField 原始的字段信息
-     * @since 0.2.0
+     * @param sourceDefaultField 字段类型
      */
-    private void handleSourceDefaultField(final DefaultField sourceDefaultField) {
-        final Field field = sourceDefaultField.getField();
-        final Class<?> fieldType = field.getType();
-
+    private void handleMappingValue(final DefaultField sourceDefaultField) {
+        final Class<?> fieldType = sourceDefaultField.getField().getType();
         //Map Entry 的赋值处理
         //1. 如果需要处理，会变得比较复杂。暂时不做处理
         //2. 后期可以针对 key/value 进行分别的处理。
-        if(ClassTypeUtil.isMapClass(fieldType)) {
+        if(ClassTypeUtil.isMap(fieldType)) {
             return;
         }
 
@@ -189,7 +188,7 @@ public class DefaultBeanMapping implements IBeanMpping {
 
         // 数组
         // [数组反射基础知识](https://www.cnblogs.com/penghongwei/p/3300094.html)
-        if(ClassTypeUtil.isArrayClass(fieldType)) {
+        if(ClassTypeUtil.isArray(fieldType)) {
             Object[] arrays = (Object[]) mappingValue;
             if(ArrayUtil.isNotEmpty(arrays)) {
                 // 获取数组的元素类型。
@@ -202,10 +201,8 @@ public class DefaultBeanMapping implements IBeanMpping {
                 }
                 mappingValue = newArray;
             }
-        }
-
-        // Iterable 字段
-        if(ClassTypeUtil.isIterableClass(fieldType)) {
+        } else if(ClassTypeUtil.isIterable(fieldType)) {
+            // Iterable 字段
             Iterable<?> iterableMappingValue = (Iterable<?>) mappingValue;
             Iterator iterator = iterableMappingValue.iterator();
 
@@ -216,15 +213,13 @@ public class DefaultBeanMapping implements IBeanMpping {
                 resultList.add(entryMapping);
             }
             mappingValue = resultList;
-        }
+        } else {
+            // JDK 本身的对象类，直接不做处理。
+            if(ClassTypeUtil.isJdk(fieldType)) {
+                return;
+            }
 
-        // JDK 本身的对象类，直接不做处理。
-        if(ClassTypeUtil.isJdkClass(fieldType)) {
-            return;
-        }
-
-        // 自定义 java 对象
-        if(ClassTypeUtil.isJavaBeanClass(fieldType)) {
+            // 自定义 java 对象
             // 对于单个的直接递归调用即可。
             // 不包含任何注解，直接赋值(不做任何处理)，不是基础属性，则做进一步的赋值。
             // 是否需要调用一次属性的复制？将 object 的值，使用 BeanUtil.copy 再赋值一遍，这就变成了深度拷贝。
@@ -232,8 +227,6 @@ public class DefaultBeanMapping implements IBeanMpping {
             // 替换掉原来的结果信息。
             mappingValue = getEntryMapping(mappingValue);
         }
-
-        // 重新设置值
         sourceDefaultField.setMappingValue(mappingValue);
     }
 
@@ -253,6 +246,14 @@ public class DefaultBeanMapping implements IBeanMpping {
             return entry;
         }
 
+        // 如果是 JDK 自带的类
+        // TODO: 这里依然是应该先考虑集合。
+        final Class<?> entryClass = entry.getClass();
+        if(ClassTypeUtil.isJdk(entryClass)) {
+            return entry;
+        }
+
+        // 自定义对象
         Object entryMapping = ClassUtil.newInstance(entry.getClass());
         BeanUtil.copyProperties(entry, entryMapping);
         return entryMapping;

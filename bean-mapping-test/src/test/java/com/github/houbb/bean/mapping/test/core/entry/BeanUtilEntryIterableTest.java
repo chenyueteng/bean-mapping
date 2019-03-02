@@ -3,12 +3,14 @@ package com.github.houbb.bean.mapping.test.core.entry;
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
 import com.github.houbb.bean.mapping.test.entry.model.array.EntryArraySource;
 import com.github.houbb.bean.mapping.test.entry.model.array.EntryArrayTarget;
-
 import com.github.houbb.bean.mapping.test.entry.model.component.EntryBeanComponent;
+import com.github.houbb.bean.mapping.test.entry.model.iterable.EntryIterableSource;
+import com.github.houbb.bean.mapping.test.entry.model.iterable.EntryIterableTarget;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * <p> 明细数组相关测试 </p>
@@ -18,31 +20,32 @@ import java.util.Arrays;
  *
  * @author houbinbin
  */
-public class BeanUtilEntryArrayTest {
+public class BeanUtilEntryIterableTest {
 
     /**
      * 数组中存放的是基础类型
      */
     @Test
     public void baseTypeTest() {
-        EntryArraySource source = new EntryArraySource();
-        EntryArrayTarget target = new EntryArrayTarget();
+        EntryIterableSource source = new EntryIterableSource();
+        EntryIterableTarget target = new EntryIterableTarget();
 
-        source.setBaseStrings(new String[]{"A", "B", "C"});
+        source.setBaseStrings(Arrays.asList("A", "B", "C"));
         BeanUtil.copyProperties(source, target);
-        Assertions.assertEquals("[A, B, C]", Arrays.toString(target.getBaseStrings()));
+        Assertions.assertEquals(source.getBaseStrings(), target.getBaseStrings());
     }
 
     @Test
     public void beanTypeTest() {
+        EntryIterableSource source = new EntryIterableSource();
+        EntryIterableTarget target = new EntryIterableTarget();
+
         EntryBeanComponent component = new EntryBeanComponent();
         component.setName("component");
-        EntryArraySource source = new EntryArraySource();
-        source.setComponents(new EntryBeanComponent[]{component});
+        source.setComponents(Collections.singletonList(component));
 
-        EntryArrayTarget target = new EntryArrayTarget();
         BeanUtil.copyProperties(source, target);
-        Assertions.assertEquals("component-TEST", target.getComponents()[0].getName());
+        Assertions.assertEquals("[EntryBeanSourceComponent{name='component-TEST'}]", target.getComponents().toString());
     }
 
 }
