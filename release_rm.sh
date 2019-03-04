@@ -2,8 +2,8 @@
 echo "============================= RELEASE START..."
 
 ## 版本号信息(需要手动指定)
-oldVersion="1.0.0"
-newVersion="1.0.0"
+oldVersion="0.2.1"
+newVersion="0.2.1"
 projectName="${artifactId}"
 
 # 删除分支
