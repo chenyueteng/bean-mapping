@@ -10,7 +10,11 @@
     <parent>
         <artifactId>bean-mapping</artifactId>
         <groupId>com.github.houbb</groupId>
+<<<<<<< f392e8612d502b39c1e87972d55c6472bd130441
         <version>0.1.0</version>
+=======
+        <version>0.2.0-SNAPSHOT</version>
+>>>>>>> [Feature] 添加 Entry impl
     </parent>
     <modelVersion>4.0.0</modelVersion>
 

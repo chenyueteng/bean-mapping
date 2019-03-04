@@ -5,7 +5,11 @@
     <groupId>com.github.houbb</groupId>
     <artifactId>bean-mapping</artifactId>
     <packaging>pom</packaging>
+<<<<<<< f392e8612d502b39c1e87972d55c6472bd130441
     <version>0.1.0</version>
+=======
+    <version>0.2.0-SNAPSHOT</version>
+>>>>>>> [Feature] 添加 Entry impl
     <modules>
         <module>bean-mapping-api</module>
         <module>bean-mapping-core</module>
