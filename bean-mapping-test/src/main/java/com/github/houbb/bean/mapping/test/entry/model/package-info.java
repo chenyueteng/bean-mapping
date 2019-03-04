@@ -1,5 +1,5 @@
 /**
- * <p> </p>
+ * <p> 对象信息相关 </p>
  *
  * <pre> Created: 2019-02-25 21:07  </pre>
  * <pre> Project: bean-mapping  </pre>

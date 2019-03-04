@@ -2,8 +2,8 @@
 echo "============================= RELEASE START..."
 
 ## 版本号信息(需要手动指定)
-oldVersion="0.1.0"
-newVersion="0.1.1"
+oldVersion="0.2.0"
+newVersion="0.2.1"
 projectName="bean-mapping"
 
 # release 项目版本
