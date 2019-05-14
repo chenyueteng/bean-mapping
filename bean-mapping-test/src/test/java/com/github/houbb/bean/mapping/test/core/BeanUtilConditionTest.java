@@ -3,8 +3,8 @@ package com.github.houbb.bean.mapping.test.core;
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
 import com.github.houbb.bean.mapping.test.annotation.condition.model.FooConditionSource;
 import com.github.houbb.bean.mapping.test.annotation.condition.model.FooConditionTarget;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * 条件测试
@@ -26,13 +26,13 @@ public class BeanUtilConditionTest {
 
         //1. 当 source 中没有值时
         BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
-        Assertions.assertEquals(targetValue, fooConditionTarget.getNotNullName());
+        Assert.assertEquals(targetValue, fooConditionTarget.getNotNullName());
 
         //2. 当 source 中设置值时
         final String sourceValue = "sourceNotNullName";
         fooConditionSource.setNotNullName(sourceValue);
         BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
-        Assertions.assertEquals(sourceValue, fooConditionTarget.getNotNullName());
+        Assert.assertEquals(sourceValue, fooConditionTarget.getNotNullName());
     }
 
     /**
@@ -51,12 +51,12 @@ public class BeanUtilConditionTest {
 
         //1. 当 target 字段有值时
         BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
-        Assertions.assertEquals(targetNullView, fooConditionTarget.getNullView());
+        Assert.assertEquals(targetNullView, fooConditionTarget.getNullView());
 
         //2. 当 target 字段信息为 null 时
         fooConditionTarget.setNullView(null);
         BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
-        Assertions.assertEquals(sourceNullView, fooConditionTarget.getNullView());
+        Assert.assertEquals(sourceNullView, fooConditionTarget.getNullView());
     }
 
     /**
@@ -73,12 +73,12 @@ public class BeanUtilConditionTest {
 
         //1. source 对象中的 id 没有值
         BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
-        Assertions.assertNull(fooConditionTarget.getIdRemark());
+        Assert.assertNull(fooConditionTarget.getIdRemark());
 
         //2. source 对象中的 id 有值
         fooConditionSource.setId(1L);
         BeanUtil.copyProperties(fooConditionSource, fooConditionTarget);
-        Assertions.assertEquals(idRemark, fooConditionTarget.getIdRemark());
+        Assert.assertEquals(idRemark, fooConditionTarget.getIdRemark());
     }
 
 }

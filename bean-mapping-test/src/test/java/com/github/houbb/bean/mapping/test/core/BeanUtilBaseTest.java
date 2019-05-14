@@ -3,8 +3,8 @@ package com.github.houbb.bean.mapping.test.core;
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
 import com.github.houbb.bean.mapping.test.base.model.BaseSource;
 import com.github.houbb.bean.mapping.test.base.model.BaseTarget;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -27,10 +27,10 @@ public class BeanUtilBaseTest {
         BeanUtil.copyProperties(baseSource, baseTarget);
 
         // 断言赋值后的属性和原来相同
-        Assertions.assertEquals(baseSource.getAge(), baseTarget.getAge());
-        Assertions.assertEquals(baseSource.getName(), baseTarget.getName());
-        Assertions.assertEquals(baseSource.getBirthday(), baseTarget.getBirthday());
-        Assertions.assertEquals(baseSource.getStringList(), baseTarget.getStringList());
+        Assert.assertEquals(baseSource.getAge(), baseTarget.getAge());
+        Assert.assertEquals(baseSource.getName(), baseTarget.getName());
+        Assert.assertEquals(baseSource.getBirthday(), baseTarget.getBirthday());
+        Assert.assertEquals(baseSource.getStringList(), baseTarget.getStringList());
     }
 
     /**

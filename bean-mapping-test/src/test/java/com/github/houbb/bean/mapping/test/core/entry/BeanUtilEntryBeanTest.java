@@ -3,10 +3,9 @@ package com.github.houbb.bean.mapping.test.core.entry;
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
 import com.github.houbb.bean.mapping.test.entry.model.bean.EntryBeanSource;
 import com.github.houbb.bean.mapping.test.entry.model.bean.EntryBeanTarget;
-
 import com.github.houbb.bean.mapping.test.entry.model.component.EntryBeanComponent;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * <p> 明细对象相关测试 </p>
@@ -35,7 +34,7 @@ public class BeanUtilEntryBeanTest {
         BeanUtil.copyProperties(source, target);
 
         //3. 结果验证
-        Assertions.assertEquals("component-TEST", target.getComponent().getName());
+        Assert.assertEquals("component-TEST", target.getComponent().getName());
     }
 
 }

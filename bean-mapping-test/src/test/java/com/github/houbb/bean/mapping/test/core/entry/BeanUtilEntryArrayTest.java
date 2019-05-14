@@ -3,10 +3,9 @@ package com.github.houbb.bean.mapping.test.core.entry;
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
 import com.github.houbb.bean.mapping.test.entry.model.array.EntryArraySource;
 import com.github.houbb.bean.mapping.test.entry.model.array.EntryArrayTarget;
-
 import com.github.houbb.bean.mapping.test.entry.model.component.EntryBeanComponent;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.Arrays;
 
@@ -30,7 +29,7 @@ public class BeanUtilEntryArrayTest {
 
         source.setBaseStrings(new String[]{"A", "B", "C"});
         BeanUtil.copyProperties(source, target);
-        Assertions.assertEquals("[A, B, C]", Arrays.toString(target.getBaseStrings()));
+        Assert.assertEquals("[A, B, C]", Arrays.toString(target.getBaseStrings()));
     }
 
     @Test
@@ -42,7 +41,7 @@ public class BeanUtilEntryArrayTest {
 
         EntryArrayTarget target = new EntryArrayTarget();
         BeanUtil.copyProperties(source, target);
-        Assertions.assertEquals("component-TEST", target.getComponents()[0].getName());
+        Assert.assertEquals("component-TEST", target.getComponents()[0].getName());
     }
 
 }

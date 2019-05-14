@@ -3,8 +3,8 @@ package com.github.houbb.bean.mapping.test.core;
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
 import com.github.houbb.bean.mapping.test.annotation.name.FooNameSource;
 import com.github.houbb.bean.mapping.test.annotation.name.FooNameTarget;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * 注解 name() 属性测试
@@ -26,8 +26,8 @@ public class BeanUtilNameTest {
         FooNameTarget fooNameTarget = new FooNameTarget();
         BeanUtil.copyProperties(fooNameSource, fooNameTarget);
 
-        Assertions.assertEquals(fooNameSource.getModel(), fooNameTarget.getModelVo());
-        Assertions.assertEquals(fooNameSource.getName(), fooNameTarget.getNameVo());
+        Assert.assertEquals(fooNameSource.getModel(), fooNameTarget.getModelVo());
+        Assert.assertEquals(fooNameSource.getName(), fooNameTarget.getNameVo());
     }
 
 }

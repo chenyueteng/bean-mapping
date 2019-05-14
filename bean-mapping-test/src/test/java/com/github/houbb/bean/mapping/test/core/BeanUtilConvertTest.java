@@ -3,8 +3,8 @@ package com.github.houbb.bean.mapping.test.core;
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
 import com.github.houbb.bean.mapping.test.annotation.convert.model.FooConvertSource;
 import com.github.houbb.bean.mapping.test.annotation.convert.model.FooConvertTarget;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.Arrays;
 
@@ -32,8 +32,8 @@ public class BeanUtilConvertTest {
         BeanUtil.copyProperties(fooConvertSource, fooConvertTarget);
         //验证原始对象不变。
 
-        Assertions.assertEquals(source, fooConvertSource.getSourceSuffix());
-        Assertions.assertEquals(target, fooConvertTarget.getTargetSuffix());
+        Assert.assertEquals(source, fooConvertSource.getSourceSuffix());
+        Assert.assertEquals(target, fooConvertTarget.getTargetSuffix());
     }
 
     /**
@@ -48,7 +48,7 @@ public class BeanUtilConvertTest {
 
         //验证后缀转换器生效
         BeanUtil.copyProperties(fooConvertSource, fooConvertTarget);
-        Assertions.assertEquals("sameType-TEST", fooConvertTarget.getSameType());
+        Assert.assertEquals("sameType-TEST", fooConvertTarget.getSameType());
     }
 
     /**
@@ -63,7 +63,7 @@ public class BeanUtilConvertTest {
 
         //验证列表转换器生效
         BeanUtil.copyProperties(fooConvertSource, fooConvertTarget);
-        Assertions.assertEquals(Arrays.asList("listStringType"), fooConvertTarget.getListStringType());
+        Assert.assertEquals(Arrays.asList("listStringType"), fooConvertTarget.getListStringType());
     }
 
 }

@@ -1,13 +1,11 @@
 package com.github.houbb.bean.mapping.test.core.entry;
 
 import com.github.houbb.bean.mapping.core.util.BeanUtil;
-import com.github.houbb.bean.mapping.test.entry.model.array.EntryArraySource;
-import com.github.houbb.bean.mapping.test.entry.model.array.EntryArrayTarget;
 import com.github.houbb.bean.mapping.test.entry.model.component.EntryBeanComponent;
 import com.github.houbb.bean.mapping.test.entry.model.iterable.EntryIterableSource;
 import com.github.houbb.bean.mapping.test.entry.model.iterable.EntryIterableTarget;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -32,7 +30,7 @@ public class BeanUtilEntryIterableTest {
 
         source.setBaseStrings(Arrays.asList("A", "B", "C"));
         BeanUtil.copyProperties(source, target);
-        Assertions.assertEquals(source.getBaseStrings(), target.getBaseStrings());
+        Assert.assertEquals(source.getBaseStrings(), target.getBaseStrings());
     }
 
     @Test
@@ -45,7 +43,7 @@ public class BeanUtilEntryIterableTest {
         source.setComponents(Collections.singletonList(component));
 
         BeanUtil.copyProperties(source, target);
-        Assertions.assertEquals("[EntryBeanSourceComponent{name='component-TEST'}]", target.getComponents().toString());
+        Assert.assertEquals("[EntryBeanSourceComponent{name='component-TEST'}]", target.getComponents().toString());
     }
 
 }

@@ -10,7 +10,7 @@
     <parent>
         <artifactId>bean-mapping</artifactId>
         <groupId>com.github.houbb</groupId>
-        <version>0.2.1-SNAPSHOT</version>
+        <version>0.2.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -18,7 +18,7 @@
     <description>The test module for bean mapping, do not import.</description>
 
     <dependencies>
-        <!--============================== OTHER ==============================-->
+        <!--============================== SELF ==============================-->
         <dependency>
             <groupId>com.github.houbb</groupId>
             <artifactId>bean-mapping-core</artifactId>
@@ -26,9 +26,10 @@
 
         <!--============================== OTHER ==============================-->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>
